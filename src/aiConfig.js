@@ -1,0 +1,19 @@
+export const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+
+export async function groqChat(messages) {
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${GROQ_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "openai/gpt-oss-20b",
+      messages: messages,
+      temperature: 0.4
+    }),
+  });
+
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content || "";
+}
