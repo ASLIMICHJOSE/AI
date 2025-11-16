@@ -1,16 +1,24 @@
-import AssistantBubble from "./components/AssistantBubble";
-import AssistantPanel from "./components/AssistantPanel";
-import { AssistantProvider } from "./context/AssistantContext";
+import React from "react";
+import AssistantBubble from "./components/AssistantBubble.jsx";
+import AssistantPanel from "./components/AssistantPanel.jsx";
+import { AssistantProvider } from "./context/AssistantContext.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
-function App() {
+export default function App() {
   return (
-    <AssistantProvider>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <AssistantBubble />
-        <AssistantPanel />
-      </div>
-    </AssistantProvider>
+    <ThemeProvider>
+      <AssistantProvider>
+        <div className="min-h-screen">
+          {/* Optionally your site content can be here */}
+          <main className="p-6">
+            <h1 className="text-3xl font-bold">ur-assistent</h1>
+            <p className="mt-2">Open the assistant bubble at bottom-right.</p>
+          </main>
+
+          <AssistantBubble />
+          <AssistantPanel />
+        </div>
+      </AssistantProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;
